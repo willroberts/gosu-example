@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'gosu'
-require './character.rb'
-require './coin.rb'
+require './character'
+require './coin'
 
 WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
@@ -12,10 +12,10 @@ end
 
 class GameWindow < Gosu::Window
   def initialize
-    super WINDOW_WIDTH, WINDOW_HEIGHT, :fullscreen => false
-    self.caption = "Eggplant Game"
+    super WINDOW_WIDTH, WINDOW_HEIGHT, fullscreen: false
+    self.caption = 'Eggplant Game'
 
-    @grass = Gosu::Image.new("images/grass.png", :tileable => true)
+    @grass = Gosu::Image.new('images/grass.png', tileable: true)
 
     @character = Character.new
     @character.warp(
@@ -23,8 +23,8 @@ class GameWindow < Gosu::Window
       WINDOW_HEIGHT / 2 - 20
     )
 
-    @coin_anim = Gosu::Image.load_tiles("images/coin.png", 25, 25)
-    @coins = Array.new
+    @coin_anim = Gosu::Image.load_tiles('images/coin.png', 25, 25)
+    @coins = []
 
     @font = Gosu::Font.new(20)
   end
@@ -37,9 +37,9 @@ class GameWindow < Gosu::Window
     @character.collect_coins(@coins)
 
     # Spawn more coins as needed.
-    if rand < 0.01 and @coins.size < 3
-      @coins.push(Coin.new(@coin_anim))
-    end
+    return unless rand < 0.01 and @coins.size < 3
+
+    @coins.push(Coin.new(@coin_anim))
   end
 
   # draw() runs unreliably at 60fps.
@@ -64,21 +64,13 @@ class GameWindow < Gosu::Window
   end
 
   def handle_input
-    if Gosu.button_down? Gosu::KB_ESCAPE
-      close
-    end
-    if Gosu.button_down? Gosu::KB_UP
-      @character.move_up
-    end
-    if Gosu.button_down? Gosu::KB_DOWN
-      @character.move_down
-    end
-    if Gosu.button_down? Gosu::KB_LEFT
-      @character.move_left
-    end
-    if Gosu.button_down? Gosu::KB_RIGHT
-      @character.move_right
-    end
+    close if Gosu.button_down? Gosu::KB_ESCAPE
+    @character.move_up if Gosu.button_down? Gosu::KB_UP
+    @character.move_down if Gosu.button_down? Gosu::KB_DOWN
+    @character.move_left if Gosu.button_down? Gosu::KB_LEFT
+    return unless Gosu.button_down? Gosu::KB_RIGHT
+
+    @character.move_right
   end
 end
 

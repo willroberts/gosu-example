@@ -5,26 +5,22 @@ class Character
   attr_reader :coins
 
   def initialize
-    @image = Gosu::Image.new("images/eggplant.bmp")
+    @image = Gosu::Image.new('images/eggplant.bmp')
     @x = 0.0
     @y = 0.0
     @sprite_size = 40.0
     @coins = 0
-    #@coin_sound = Gosu::Sample.new("sounds/coin.wav")
+    # @coin_sound = Gosu::Sample.new("sounds/coin.wav")
   end
 
   ''' Pickups '''
-
-  def coins
-    @coins
-  end
 
   def collect_coins(coins)
     half_size = @sprite_size / 2.0
     coins.reject! do |coin|
       if Gosu.distance(@x + half_size, @y + half_size, coin.x, coin.y) < PICKUP_DISTANCE
         @coins += 1
-        #@coin_sound.play
+        # @coin_sound.play
         true
       else
         false
@@ -35,35 +31,32 @@ class Character
   ''' Movement '''
 
   def warp(x, y)
-    @x, @y = x, y
+    @x = x
+    @y = y
   end
 
   def move_up
-    if @y < MOVE_DISTANCE
-      return
-    end
-    @y = @y - MOVE_DISTANCE
+    return if @y < MOVE_DISTANCE
+
+    @y -= MOVE_DISTANCE
   end
 
   def move_down
-    if @y > WINDOW_HEIGHT - (@sprite_size + MOVE_DISTANCE)
-      return
-    end
-    @y = @y + MOVE_DISTANCE
+    return if @y > WINDOW_HEIGHT - (@sprite_size + MOVE_DISTANCE)
+
+    @y += MOVE_DISTANCE
   end
 
   def move_left
-    if @x < MOVE_DISTANCE
-      return
-    end
-    @x = @x - MOVE_DISTANCE
+    return if @x < MOVE_DISTANCE
+
+    @x -= MOVE_DISTANCE
   end
 
   def move_right
-    if @x > WINDOW_WIDTH - (@sprite_size + MOVE_DISTANCE)
-      return
-    end
-    @x = @x + MOVE_DISTANCE
+    return if @x > WINDOW_WIDTH - (@sprite_size + MOVE_DISTANCE)
+
+    @x += MOVE_DISTANCE
   end
 
   ''' Rendering '''
