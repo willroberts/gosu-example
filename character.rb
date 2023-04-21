@@ -4,7 +4,7 @@ class Character
     @x = 0.0
     @y = 0.0
     @sprite_size = 40.0
-    @move_distance = 20.0
+    @move_distance = 10.0
   end
 
   def warp(x, y)
