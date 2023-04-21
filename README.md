@@ -11,6 +11,8 @@ brew install sdl2
 gem install gosu
 ```
 
+Then start the game:
+
 ```sh
 ruby main.rb
 ```
