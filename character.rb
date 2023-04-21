@@ -2,6 +2,8 @@ MOVE_DISTANCE = 6.0
 PICKUP_DISTANCE = 20.0
 
 class Character
+  attr_reader :coins
+
   def initialize
     @image = Gosu::Image.new("images/eggplant.bmp")
     @x = 0.0
@@ -17,12 +19,15 @@ class Character
   end
 
   def collect_coins(coins)
-    coins.reject! { |coin|
-      Gosu.distance(@x + @sprite_size / 2.0,
-                    @y + @sprite_size / 2.0,
-                    coin.x,
-                    coin.y) < PICKUP_DISTANCE
-    }
+    half_size = @sprite_size / 2.0
+    coins.reject! do |coin|
+      if Gosu.distance(@x + half_size, @y + half_size, coin.x, coin.y) < PICKUP_DISTANCE
+        @coins += 1
+        true
+      else
+        false
+      end
+    end
   end
 
   ''' Movement '''

@@ -7,13 +7,13 @@ WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
 
 module ZIndex
-  BACKGROUND, PICKUPS, CHARACTERS = *0..2
+  BACKGROUND, PICKUPS, CHARACTERS, HUD = *0..3
 end
 
 class GameWindow < Gosu::Window
   def initialize
     super WINDOW_WIDTH, WINDOW_HEIGHT, :fullscreen => false
-    self.caption = "Example Game"
+    self.caption = "Eggplant Game"
 
     @grass = Gosu::Image.new("images/grass.png", :tileable => true)
 
@@ -25,12 +25,15 @@ class GameWindow < Gosu::Window
 
     @coin_anim = Gosu::Image.load_tiles("animations/coin.png", 25, 25)
     @coins = Array.new
+
+    @font = Gosu::Font.new(20)
   end
 
   # update() runs reliably at 60fps.
   def update
     handle_input
-    # Collect coins when within 35px of them.
+
+    # Collect coins when within range.
     @character.collect_coins(@coins)
 
     # Spawn more coins as needed.
@@ -41,13 +44,23 @@ class GameWindow < Gosu::Window
 
   # draw() runs unreliably at 60fps.
   def draw
+    # Background tiles
     0.step(WINDOW_WIDTH, 40).each do |x|
       0.step(WINDOW_HEIGHT, 40).each do |y|
         @grass.draw(x, y, ZIndex::BACKGROUND)
       end
     end
+
+    # Pickups
     @coins.each { |coin| coin.draw }
+
+    # Player
     @character.draw
+
+    # HUD
+    @font.draw_text("Score: #{@character.coins}",
+                    10, 10, ZIndex::HUD,
+                    1.0, 1.0, Gosu::Color::WHITE)
   end
 
   def handle_input
