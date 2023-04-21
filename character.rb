@@ -40,6 +40,6 @@ class Character
   end
 
   def draw
-    @image.draw(@x, @y, 1)
+    @image.draw(@x, @y, ZIndex::ACTORS)
   end
 end

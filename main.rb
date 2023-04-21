@@ -5,6 +5,10 @@ require './character.rb'
 WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
 
+module ZIndex
+  BACKGROUND, ACTORS = *0..1
+end
+
 class GameWindow < Gosu::Window
   def initialize
     super WINDOW_WIDTH, WINDOW_HEIGHT, :fullscreen => false
@@ -13,7 +17,10 @@ class GameWindow < Gosu::Window
     @grass = Gosu::Image.new("grass.png", :tileable => true)
 
     @character = Character.new
-    @character.warp(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+    @character.warp(
+      WINDOW_WIDTH / 2 - 20,
+      WINDOW_HEIGHT / 2 - 20
+    )
   end
 
   # update() runs reliably at 60fps.
@@ -25,7 +32,7 @@ class GameWindow < Gosu::Window
   def draw
     0.step(WINDOW_WIDTH, 40).each do |x|
       0.step(WINDOW_HEIGHT, 40).each do |y|
-        @grass.draw(x, y, 0)
+        @grass.draw(x, y, ZIndex::BACKGROUND)
       end
     end
     @character.draw
