@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Coin is a pickup class which can be interacted with by the player.
 class Coin
   attr_reader :x, :y
 

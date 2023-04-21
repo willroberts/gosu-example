@@ -8,10 +8,12 @@ require './coin'
 WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
 
+# ZIndex is a convenience enum for Z-Order presets when drawing to the screen.
 module ZIndex
   BACKGROUND, PICKUPS, CHARACTERS, HUD = *0..3
 end
 
+# GameWindow is the main game application.
 class GameWindow < Gosu::Window
   def initialize
     super WINDOW_WIDTH, WINDOW_HEIGHT, fullscreen: false

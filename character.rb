@@ -3,6 +3,7 @@
 MOVE_DISTANCE = 6.0
 PICKUP_DISTANCE = 20.0
 
+# Character is the player class.
 class Character
   attr_reader :coins
 
@@ -28,9 +29,9 @@ class Character
     end
   end
 
-  def warp(x, y)
-    @x = x
-    @y = y
+  def warp(pos_x, pos_y)
+    @x = pos_x
+    @y = pos_y
   end
 
   def move_up
