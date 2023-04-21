@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 MOVE_DISTANCE = 6.0
 PICKUP_DISTANCE = 20.0
 
@@ -13,8 +15,6 @@ class Character
     # @coin_sound = Gosu::Sample.new("sounds/coin.wav")
   end
 
-  ''' Pickups '''
-
   def collect_coins(coins)
     half_size = @sprite_size / 2.0
     coins.reject! do |coin|
@@ -27,8 +27,6 @@ class Character
       end
     end
   end
-
-  ''' Movement '''
 
   def warp(x, y)
     @x = x
@@ -58,8 +56,6 @@ class Character
 
     @x += MOVE_DISTANCE
   end
-
-  ''' Rendering '''
 
   def draw
     @image.draw(@x, @y, ZIndex::CHARACTERS)

@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'gosu'
 require './character'
 require './coin'
@@ -37,7 +39,7 @@ class GameWindow < Gosu::Window
     @character.collect_coins(@coins)
 
     # Spawn more coins as needed.
-    return unless rand < 0.01 and @coins.size < 3
+    return unless (rand < 0.01) && (@coins.size < 3)
 
     @coins.push(Coin.new(@coin_anim))
   end
@@ -52,7 +54,7 @@ class GameWindow < Gosu::Window
     end
 
     # Pickups
-    @coins.each { |coin| coin.draw }
+    @coins.each(&:draw)
 
     # Player
     @character.draw

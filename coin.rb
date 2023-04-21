@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Coin
   attr_reader :x, :y
 
