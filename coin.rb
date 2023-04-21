@@ -4,8 +4,22 @@ class Coin
   def initialize(animation)
     @animation = animation
     @color = Gosu::Color::YELLOW.dup
+    @sprite_size = 25
     @x = rand * WINDOW_WIDTH
     @y = rand * WINDOW_HEIGHT
+
+    # Prevent spawning actors out-of-bounds.
+    half_size = @sprite_size / 2.0
+    if @x > WINDOW_WIDTH - half_size
+      @x = WINDOW_WIDTH - half_size
+    elsif @x < half_size
+      @x = half_size
+    end
+    if @y > WINDOW_HEIGHT - half_size
+      @y = WINDOW_HEIGHT - half_size
+    elsif @y < half_size
+      @y = half_size
+    end
   end
 
   def draw

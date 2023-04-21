@@ -34,7 +34,7 @@ class GameWindow < Gosu::Window
     @character.collect_coins(@coins)
 
     # Spawn more coins as needed.
-    if rand < 0.01 and @coins.size < 2
+    if rand < 0.01 and @coins.size < 3
       @coins.push(Coin.new(@coin_anim))
     end
   end

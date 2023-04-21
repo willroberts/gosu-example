@@ -1,5 +1,5 @@
 MOVE_DISTANCE = 10.0
-PICKUP_DISTANCE = 40.0
+PICKUP_DISTANCE = 20.0
 
 class Character
   def initialize
