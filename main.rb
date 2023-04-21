@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 require 'gosu'
 require './character.rb'
+require './coin.rb'
 
 WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
 
 module ZIndex
-  BACKGROUND, ACTORS = *0..1
+  BACKGROUND, PICKUPS, CHARACTERS = *0..2
 end
 
 class GameWindow < Gosu::Window
@@ -14,18 +15,28 @@ class GameWindow < Gosu::Window
     super WINDOW_WIDTH, WINDOW_HEIGHT, :fullscreen => false
     self.caption = "Example Game"
 
-    @grass = Gosu::Image.new("grass.png", :tileable => true)
+    @grass = Gosu::Image.new("images/grass.png", :tileable => true)
 
     @character = Character.new
     @character.warp(
       WINDOW_WIDTH / 2 - 20,
       WINDOW_HEIGHT / 2 - 20
     )
+
+    @coin_anim = Gosu::Image.load_tiles("animations/coin.png", 25, 25)
+    @coins = Array.new
   end
 
   # update() runs reliably at 60fps.
   def update
     handle_input
+    # Collect coins when within 35px of them.
+    @character.collect_coins(@coins)
+
+    # Spawn more coins as needed.
+    if rand < 0.01 and @coins.size < 2
+      @coins.push(Coin.new(@coin_anim))
+    end
   end
 
   # draw() runs unreliably at 60fps.
@@ -35,6 +46,7 @@ class GameWindow < Gosu::Window
         @grass.draw(x, y, ZIndex::BACKGROUND)
       end
     end
+    @coins.each { |coin| coin.draw }
     @character.draw
   end
 
