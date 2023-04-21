@@ -23,7 +23,7 @@ class GameWindow < Gosu::Window
       WINDOW_HEIGHT / 2 - 20
     )
 
-    @coin_anim = Gosu::Image.load_tiles("animations/coin.png", 25, 25)
+    @coin_anim = Gosu::Image.load_tiles("images/coin.png", 25, 25)
     @coins = Array.new
 
     @font = Gosu::Font.new(20)
