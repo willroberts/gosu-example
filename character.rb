@@ -10,6 +10,7 @@ class Character
     @y = 0.0
     @sprite_size = 40.0
     @coins = 0
+    #@coin_sound = Gosu::Sample.new("sounds/coin.wav")
   end
 
   ''' Pickups '''
@@ -23,6 +24,7 @@ class Character
     coins.reject! do |coin|
       if Gosu.distance(@x + half_size, @y + half_size, coin.x, coin.y) < PICKUP_DISTANCE
         @coins += 1
+        #@coin_sound.play
         true
       else
         false
