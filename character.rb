@@ -1,4 +1,4 @@
-MOVE_DISTANCE = 10.0
+MOVE_DISTANCE = 6.0
 PICKUP_DISTANCE = 20.0
 
 class Character
