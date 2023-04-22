@@ -8,7 +8,7 @@ class Character
   attr_reader :coins
 
   def initialize
-    @image = Gosu::Image.new('images/eggplant.bmp')
+    @image = Gosu::Image.new('img/eggplant.bmp')
     @x = 0.0
     @y = 0.0
     @sprite_size = 40.0

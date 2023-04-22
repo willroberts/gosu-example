@@ -1,9 +1,8 @@
-#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require 'gosu'
-require './character'
-require './coin'
+require_relative './character'
+require_relative './coin'
 
 WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
@@ -19,7 +18,7 @@ class GameWindow < Gosu::Window
     super WINDOW_WIDTH, WINDOW_HEIGHT, fullscreen: false
     self.caption = 'Eggplant Game'
 
-    @grass = Gosu::Image.new('images/grass.png', tileable: true)
+    @grass = Gosu::Image.new('img/grass.png', tileable: true)
 
     @character = Character.new
     @character.warp(
@@ -27,7 +26,7 @@ class GameWindow < Gosu::Window
       WINDOW_HEIGHT / 2 - 20
     )
 
-    @coin_anim = Gosu::Image.load_tiles('images/coin.png', 25, 25)
+    @coin_anim = Gosu::Image.load_tiles('img/coin.png', 25, 25)
     @coins = []
 
     @font = Gosu::Font.new(20)
@@ -77,5 +76,3 @@ class GameWindow < Gosu::Window
     @character.move_right
   end
 end
-
-GameWindow.new.show

@@ -14,5 +14,5 @@ gem install gosu
 Then start the game:
 
 ```sh
-ruby main.rb
+ruby bin/main.rb
 ```
