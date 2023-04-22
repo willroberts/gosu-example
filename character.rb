@@ -22,9 +22,9 @@ class Character
       if Gosu.distance(@x + half_size, @y + half_size, coin.x, coin.y) < PICKUP_DISTANCE
         @coins += 1
         # @coin_sound.play
-        true
+        true # Remove element from array.
       else
-        false
+        false # Keep element in array.
       end
     end
   end
